@@ -3,7 +3,8 @@ pipeline {
   stages {
     stage('Dev') {
       steps {
-        sh 'echo Build finished'
+        sh '''echo Build finished
+echo $HOME'''
         input(message: 'OK to QA?', ok: 'OK')
       }
     }
