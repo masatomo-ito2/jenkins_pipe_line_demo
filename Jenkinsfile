@@ -3,7 +3,6 @@ pipeline {
   stages {
     stage('Dev') {
       steps {
-        build 'test_local_provider'
         sh 'echo Build finished'
         input(message: 'OK to QA?', ok: 'OK')
       }
