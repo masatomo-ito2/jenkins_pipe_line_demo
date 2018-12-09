@@ -4,7 +4,8 @@ pipeline {
     stage('Dev') {
       steps {
         sh '''echo Build finished
-echo $HOME'''
+echo HOME: $HOME
+echo TERRAFORM_WORKING_DIR: $TERRAFORM_WORKING_DIR'''
         input(message: 'OK to QA?', ok: 'OK')
       }
     }
@@ -14,10 +15,9 @@ echo $HOME'''
         input(message: 'Provision QA env?', ok: 'OK')
         sh '''export TF_IN_AUTOMATION=1
 
-cp /home/vagrant/jenkins_pipe_line_demo/remote.tf $WORKSPACE
-
-echo ==== executing init =====
-terraform init -input=false
+cd $TERRAFORM_WORKING_DIR
+# cp /home/vagrant/jenkins_pipe_line_demo/remote.tf $TERRAFORM_WORKING_DIR
+# git clone https://github.com/masatomo-ito2/jenkins_pipe_line_demo.git
 
 echo ==== executing workspace select =====
 terraform workspace select QA
@@ -41,5 +41,8 @@ terraform apply -auto-approve'''
         sh 'echo provisioning production'
       }
     }
+  }
+  environment {
+    TERRAFORM_WORKING_DIR = '/home/vagrant/terraform_working_dir'
   }
 }
