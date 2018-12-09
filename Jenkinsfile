@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Dev') {
       steps {
-        sh '''echo Build finished
+        sh '''echo Some debugs
 echo HOME: $HOME
 echo TERRAFORM_WORKING_DIR: $TERRAFORM_WORKING_DIR'''
         input(message: 'OK to QA?', ok: 'OK')
@@ -13,7 +13,8 @@ echo TERRAFORM_WORKING_DIR: $TERRAFORM_WORKING_DIR'''
       steps {
         sh 'echo Do QA stuff'
         input(message: 'Provision QA env?', ok: 'OK')
-        sh '''export TF_IN_AUTOMATION=1
+        sh '''echo XXX I am `whoami`
+export TF_IN_AUTOMATION=1
 
 cd $TERRAFORM_WORKING_DIR
 # cp /home/vagrant/jenkins_pipe_line_demo/remote.tf $TERRAFORM_WORKING_DIR
@@ -31,7 +32,8 @@ terraform apply -auto-approve'''
       steps {
         sh 'echo do some work here'
         input(message: 'Provision Staging env?', ok: 'OK')
-        sh '''export TF_IN_AUTOMATION=1
+        sh '''echo XXX I am `whoami`
+export TF_IN_AUTOMATION=1
 
 cd $TERRAFORM_WORKING_DIR
 # cp /home/vagrant/jenkins_pipe_line_demo/remote.tf $TERRAFORM_WORKING_DIR
@@ -48,7 +50,8 @@ terraform apply -auto-approve'''
     stage('Production') {
       steps {
         input(message: 'Provision Production?', ok: 'OK')
-        sh '''export TF_IN_AUTOMATION=1
+        sh '''echo XXX I am `whoami`
+export TF_IN_AUTOMATION=1
 
 cd $TERRAFORM_WORKING_DIR
 # cp /home/vagrant/jenkins_pipe_line_demo/remote.tf $TERRAFORM_WORKING_DIR
