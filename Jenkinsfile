@@ -1,32 +1,28 @@
 pipeline {
   agent any
   stages {
-    stage('Build') {
+    stage('Dev') {
       steps {
         build 'test_local_provider'
         sh 'echo Build finished'
+        input(message: 'OK to QA?', id: 'dev', ok: '1')
       }
     }
-    stage('Test') {
+    stage('QA') {
       steps {
         sh 'echo Testing'
+        input(message: 'OK to Staging?', id: 'QA', ok: '1')
       }
     }
-    stage('Provisioning') {
+    stage('Staging') {
       steps {
         sh 'echo Provisioning infrastructure'
       }
     }
-    stage('Deploy') {
+    stage('Production') {
       steps {
         sh 'echo Deploying'
       }
     }
-  }
-  environment {
-    Dev = 'dev'
-    QA = 'qa'
-    Staging = 'staging'
-    Production = 'prod'
   }
 }
