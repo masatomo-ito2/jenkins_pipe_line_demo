@@ -12,7 +12,7 @@ provider "aws" {
 resource "aws_instance" "masa_tfe" {
   ami           = "ami-08847abae18baa040"
   instance_type = "t2.micro"
-  count			= "${var.node_count}"
+  count		= "${var.node_count}"
 
   # My security setting
   security_groups = ["${aws_security_group.jenkins_security_group.name}"]
