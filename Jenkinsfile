@@ -14,14 +14,14 @@ echo $HOME'''
         input(message: 'Provision QA env?', ok: 'OK')
         sh '''cp /home/vagrant/jenkins_pipe_line_demo/remote.tf $WORKSPACE
 
-@echo ==== executing workspace select =====
+# ==== executing workspace select =====
 terraform workspace select QA
 
-@echo ==== executing init =====
+# ==== executing init =====
 terraform init
 
 
-@echo ==== executing apply =====
+# ==== executing apply =====
 terraform apply -auto-approve'''
         input(message: 'Move to Staging?', ok: 'OK')
       }
