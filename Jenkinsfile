@@ -5,13 +5,13 @@ pipeline {
       steps {
         build 'test_local_provider'
         sh 'echo Build finished'
-        input(message: 'OK to QA?', id: 'dev', ok: 'OK')
+        input(message: 'OK to QA?', ok: 'OK')
       }
     }
     stage('QA') {
       steps {
         sh 'echo Testing'
-        input(message: 'Provision QA env?', id: 'QA', ok: 'OK')
+        input(message: 'Provision QA env?', ok: 'OK')
         echo 'Test SUCCESS'
         input(message: 'Move to Staging?', ok: 'OK')
       }
