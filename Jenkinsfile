@@ -11,7 +11,7 @@ pipeline {
       steps {
         sh 'echo Testing'
         input(message: 'Provision QA env?', ok: 'OK')
-        sh '''cp /mnt/host_machine/tf_files/resource.tf $WORKSPACE
+        sh '''cp /mnt/host_machine/tf_files/aws_provisioning.tf $WORKSPACE
 terraform init
 terraform workspace select QA
 terraform apply -auto-approve'''
