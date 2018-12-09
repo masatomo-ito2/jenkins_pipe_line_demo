@@ -12,7 +12,10 @@ pipeline {
       steps {
         sh 'echo Testing'
         input(message: 'Provision QA env?', ok: 'OK')
-        echo 'Test SUCCESS'
+        sh '''cp /mnt/host_machine/tf_files/resource.tf $WORKSPACE
+terraform init
+terraform workspace select QA
+terraform apply -auto-approve'''
         input(message: 'Move to Staging?', ok: 'OK')
       }
     }
