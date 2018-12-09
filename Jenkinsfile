@@ -12,7 +12,9 @@ echo $HOME'''
       steps {
         sh 'echo Testing'
         input(message: 'Provision QA env?', ok: 'OK')
-        sh '''cp /home/vagrant/jenkins_pipe_line_demo/remote.tf $WORKSPACE
+        sh '''export TF_IN_AUTOMATION=1
+
+cp /home/vagrant/jenkins_pipe_line_demo/remote.tf $WORKSPACE
 
 echo ==== executing init =====
 terraform init -input=false
